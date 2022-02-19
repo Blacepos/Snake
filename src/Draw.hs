@@ -32,4 +32,4 @@ drawSnake :: [(Int, Int)] -> Picture
 drawSnake snake = Pictures [pixelAt aquamarine $ toPoint pos | pos <- snake]
 
 drawFood :: (Int, Int) -> Picture 
-drawFood food = Color red $ pixelAt rose $ toPoint food
+drawFood food = pixelAt rose $ toPoint food
