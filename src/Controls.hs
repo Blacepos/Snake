@@ -1,14 +1,18 @@
 module Controls
     ( input
-    , Direction
     ) where
 
 
 import GameData
 import Graphics.Gloss.Interface.Pure.Game
+import World (initialWorld)
 
+-- Processes input events to update the world
 input :: Event -> World -> World
-input (EventKey (Char k) Down _ _) w@World{ direction=dir } = w { direction = getDirection k dir }
+input (EventKey _ Down _ _) w@World{ direction=dir, state=Dead } = initialWorld
+
+input (EventKey (Char k) Down _ _) w@World{ direction=dir } = 
+    w{ direction = getDirection k dir }
 
 input _ world = world
 

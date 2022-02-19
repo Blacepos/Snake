@@ -5,6 +5,7 @@ module Draw
 import Graphics.Gloss
 import World
 import Util
+import GameData
 
 -- Convert the current world to a Picture
 draw :: World -> Picture

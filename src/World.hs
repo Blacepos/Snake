@@ -1,12 +1,10 @@
-module World ( World ( .. )
-             , GameState ( .. )
-             , initialWorld
+module World ( initialWorld
              , gridSize
              , screenSize
              , pixelSize
              ) where
 
-import System.Random
+import System.Random ( mkStdGen, Random(randomR) )
 import GameData
 
 screenSize :: Int

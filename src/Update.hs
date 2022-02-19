@@ -11,10 +11,12 @@ import Util
 -- Step the world one frame
 update :: Float -> World -> World
 update _ w@World{ state=Start, direction=dir } = 
-    w{ state = if dir==DirNone then Start else Alive
+    w{ state = if dir==DirNone
+               then Start
+               else Alive
      }
 
-update _ w@World{ state=Dead } = initialWorld
+update _ w@World{ state=Dead } = w
 
 update _ w@(World food snake dir state seed) =
     w{ foodRandSeed = seed+2
