@@ -19,7 +19,7 @@ update _ w@World{ state=Start, direction=dir } =
 update _ w@World{ state=Dead } = w
 
 update _ w@(World food snake dir state seed) =
-    w{ foodRandSeed = seed+2
+    w{ foodRandSeed = nextSeed hitType seed
      , snake        = nextSnake hitType dir snake
      , foodPosition = nextFood hitType seed food
      , state        = if validSnake snake && snakeInbounds snake
@@ -60,3 +60,7 @@ validSnake (snakeHead:snakeTail) = snakeHead `notElem` snakeTail
 snakeInbounds :: [(Int, Int)] -> Bool
 snakeInbounds [] = True
 snakeInbounds ((x, y):_) = x >= 0 && x < gridSize && y >= 0 && y < gridSize 
+
+nextSeed :: FoodHit -> Int -> Int
+nextSeed Hit seed = seed+2
+nextSeed NoHit seed = seed
