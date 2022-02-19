@@ -2,7 +2,7 @@
 
 Snake in haskell. Programming it was fun and I also learned a lot doing it.
 
-Gloss provides a neat function which handles all of the backend event handling, updating, and drawing of the window. This one in particular uses this function:
+<a href="https://hackage.haskell.org/package/gloss">Gloss</a> provides a neat function which handles all of the backend event handling, updating, and drawing of the window. This game in particular uses this function:
 ```Haskell
 play :: Display                    -- Display mode.
      -> Color                      -- Background color.
