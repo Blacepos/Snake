@@ -1,21 +1,17 @@
-module Update where
+module Update
+    ( update
+    ) where
 
 import System.Random
 
-import World (World ( .. ), GameState ( .. ), initialWorld, screenSize, gridSize)
+import World (initialWorld, screenSize, gridSize)
+import GameData
 import Util
 
-
--- if food was hit this frame, don't move snake
-
--- create new position in direction: newPos:snake
--- check position for food: newPos == snake
--- if yes, make new food
--- else, snake = init snake
-
+-- Step the world one frame
 update :: Float -> World -> World
 update _ w@World{ state=Start, direction=dir } = 
-    w{ state = if dir==0 then Start else Alive
+    w{ state = if dir==DirNone then Start else Alive
      }
 
 update _ w@World{ state=Dead } = initialWorld
@@ -41,18 +37,18 @@ nextFood Hit currentSeed _ = (x, y)
 
 nextFood NoHit _ food = food
 
-nextSnake :: FoodHit -> Int -> [(Int, Int)] -> [(Int, Int)]
+nextSnake :: FoodHit -> Direction -> [(Int, Int)] -> [(Int, Int)]
 nextSnake Hit dir snake = addSnakeHead dir snake
 nextSnake NoHit dir snake = init $ addSnakeHead dir snake
 
-addSnakeHead :: Int -> [(Int, Int)] -> [(Int, Int)]
+addSnakeHead :: Direction -> [(Int, Int)] -> [(Int, Int)]
 addSnakeHead _ [] = []
 addSnakeHead dir snake@((x, y):tail)
-    | dir == 1  = (x, y-1) : snake
-    | dir == 2  = (x-1, y) : snake
-    | dir == 3  = (x, y+1) : snake
-    | dir == 4  = (x+1, y) : snake
-    | otherwise = snake
+    | dir == DirUp    = (x, y-1) : snake
+    | dir == DirLeft  = (x-1, y) : snake
+    | dir == DirDown  = (x, y+1) : snake
+    | dir == DirRight = (x+1, y) : snake
+    | otherwise       = snake
 
 validSnake :: [(Int, Int)] -> Bool
 validSnake [] = True

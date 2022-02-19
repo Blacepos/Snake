@@ -1,7 +1,10 @@
-module Controls where
+module Controls
+    ( input
+    , Direction
+    ) where
 
 
-import World
+import GameData
 import Graphics.Gloss.Interface.Pure.Game
 
 input :: Event -> World -> World
@@ -9,30 +12,31 @@ input (EventKey (Char k) Down _ _) w@World{ direction=dir } = w { direction = ge
 
 input _ world = world
 
-getDirection :: Char -> Int -> Int
-getDirection key dir@1
-    | key == 'a' = 2
-    | key == 'd' = 4
+-- Gets a direction based on the keypresses
+getDirection :: Char -> Direction -> Direction
+getDirection key dir@DirUp
+    | key == 'a' = DirLeft
+    | key == 'd' = DirRight
     | otherwise  = dir
 
-getDirection key dir@2
-    | key == 'w' = 1
-    | key == 's' = 3
+getDirection key dir@DirLeft
+    | key == 'w' = DirUp
+    | key == 's' = DirDown
     | otherwise  = dir
 
-getDirection key dir@3
-    | key == 'a' = 2
-    | key == 'd' = 4
+getDirection key dir@DirDown
+    | key == 'a' = DirLeft
+    | key == 'd' = DirRight
     | otherwise  = dir
 
-getDirection key dir@4
-    | key == 'w' = 1
-    | key == 's' = 3
+getDirection key dir@DirRight
+    | key == 'w' = DirUp
+    | key == 's' = DirDown
     | otherwise  = dir
 
 getDirection key dir
-    | key == 'w' = 1
-    | key == 'a' = 2
-    | key == 's' = 3
-    | key == 'd' = 4
+    | key == 'w' = DirUp
+    | key == 'a' = DirLeft
+    | key == 's' = DirDown
+    | key == 'd' = DirRight
     | otherwise  = dir

@@ -27,6 +27,7 @@ library
   exposed-modules:
       Controls
       Draw
+      GameData
       Snake
       Update
       Util

@@ -1,9 +1,12 @@
-module Draw where
+module Draw
+    ( draw
+    ) where
 
 import Graphics.Gloss
 import World
 import Util
 
+-- Convert the current world to a Picture
 draw :: World -> Picture
 draw World{ foodPosition=foodPosition, snake=snake, state=state }
     = case state of Start -> Pictures [drawSnake snake, drawFood foodPosition]

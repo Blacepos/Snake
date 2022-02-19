@@ -8,6 +8,7 @@ import World
 import Draw
 import Controls
 import Update
+import Util
 
 entryPoint :: IO ()
 entryPoint = play (InWindow "Snake!" (screenSize, screenSize) (0, 0))
@@ -17,6 +18,3 @@ entryPoint = play (InWindow "Snake!" (screenSize, screenSize) (0, 0))
                   (topLeft . draw)
                   input
                   update
-
-topLeft :: Picture -> Picture
-topLeft = Translate (fromIntegral (-screenSize) / 2.0) (fromIntegral screenSize / 2.0) . Scale 1.0 (-1.0)
